@@ -34,7 +34,7 @@ int main()
 	int answer(0); //reponse de la question
 	int memberOne(0), memberTwo(0); //variable qui contiendront les deux facteurs
 	int userAnswer(0); //pour les entrés de l'utilisateur
-	int correctAnswer(0); 
+	int correctAnswer(0);
 	int startTime(time(0));
 
 	std::cout << "Bienvenue dans ce programme de revision des tables de multiplication !" << std::endl << std::endl;
@@ -63,7 +63,7 @@ int main()
 
 	std::cout << "Tu as repondu correctement a " << correctAnswer << " questions en " << time(0) - startTime << " secondes" << std::endl;
 
-	
+
 
 	return 0;
 }

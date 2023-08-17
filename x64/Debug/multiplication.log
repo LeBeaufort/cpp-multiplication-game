@@ -1,4 +1,0 @@
-﻿  multiplication.cpp
-D:\Documents\c++\multiplication\multiplication.cpp(31,12): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
-D:\Documents\c++\multiplication\multiplication.cpp(38,15): warning C4244: 'initialisation' : conversion de 'time_t' en 'int', perte possible de données
-  multiplication.vcxproj -> D:\Documents\c++\multiplication\x64\Debug\multiplication.exe
