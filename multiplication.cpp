@@ -1,17 +1,19 @@
 #include <iostream>
 //pour les nombres aléatoires
 #include <ctime>
-#include <cstdlib>
+#include <random>
 
 
-void setValues(int& n1, int& n2, int& answer)
+void setValues(int& n1, int& n2, int& answer, std::mt19937& rng)
 {
-	n1 = std::rand() % 10 + 1;  //pour pas avoir 0, mais plutot 10
-	n2 = std::rand() % 10 + 1;
+	std::uniform_int_distribution<std::mt19937::result_type> dist(0, 10); //une distribution de nb aléatoires
+
+	n1 = dist(rng) + 1;  //pour pas avoir 0, mais plutot 10
+	n2 = dist(rng) + 1;
 	answer = n1 * n2;
 }
 
-int safeInput()
+unsigned int safeInput()
 {
 	int userInput(0);
 	if (std::cin >> userInput)
@@ -22,13 +24,16 @@ int safeInput()
 	{
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		return -1;
+		return NULL;
 	}
 }
 
+
 int main()
 {
-	srand(time(0)); //on donne une graine pour la generation, la graine utilisee est le l'heure actuelle
+	std::random_device rdmDevice; //un objet qui sert à obtenir l'entropie aléatoire du système
+	std::mt19937 rng(rdmDevice()); //le générateur de nb aléatoire → initialisé avec rdmDevice qui sert de graine
+	
 
 	int number(0); //le numéro de question
 	int answer(0); //reponse de la question
@@ -42,7 +47,7 @@ int main()
 
 	for (number; number < 10; number++)
 	{
-		setValues(memberOne, memberTwo, answer);
+		setValues(memberOne, memberTwo, answer, rng);
 		std::cout << "Question n" << number + 1 << ":" << std::endl;
 		std::cout << "Combien font " << memberOne << "x" << memberTwo << " ?" << std::endl;
 

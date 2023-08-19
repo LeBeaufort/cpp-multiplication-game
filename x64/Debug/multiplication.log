@@ -1,0 +1,3 @@
+﻿  multiplication.cpp
+D:\Documents\c++\multiplication\multiplication.cpp(43,15): warning C4244: 'initialisation' : conversion de 'time_t' en 'int', perte possible de données
+  multiplication.vcxproj -> D:\Documents\c++\multiplication\x64\Debug\multiplication.exe
