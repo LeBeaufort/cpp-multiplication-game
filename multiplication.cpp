@@ -40,7 +40,7 @@ int main()
 	int memberOne(0), memberTwo(0); //variable qui contiendront les deux facteurs
 	int userAnswer(0); //pour les entrés de l'utilisateur
 	int correctAnswer(0);
-	int startTime(time(0));
+	double startTime(time(0));
 
 	std::cout << "Bienvenue dans ce programme de revision des tables de multiplication !" << std::endl << std::endl;
 
@@ -66,9 +66,19 @@ int main()
 		}
 	}
 
-	std::cout << "Tu as repondu correctement a " << correctAnswer << " questions en " << time(0) - startTime << " secondes" << std::endl;
 
+	/*
+	score : (correcte % temps) x 10
+	*/
 
+	double score(0);
+	double timeU(0);
+
+	timeU = time(0) - startTime;
+	score = (correctAnswer / timeU) * 100;
+	std::cout << "Tu as eu " << score << " points !" << std::endl;
+
+	//std::cout << "Tu as repondu correctement a " << correctAnswer << " questions en " << timeU << " secondes" << std::endl;
 
 	return 0;
 }
