@@ -2,6 +2,10 @@
 //pour les nombres aléatoires
 #include <ctime>
 #include <random>
+//pour les fonctions relatives au fichier de score que j'ai écrites
+#include "fileFunction.h" 
+
+//todo : utiliser les fonctions définis dans fileFunction.cpp
 
 
 void setValues(int& n1, int& n2, int& answer, std::mt19937& rng)
@@ -28,9 +32,34 @@ unsigned int safeInput()
 	}
 }
 
+bool checkInput()
+{
+	std::string userinput("");
+	while (true)
+	{
+		std::cin >> userinput;
+		if (userinput == "y")
+		{
+			return true;
+		}
+		else if (userinput == "n")
+		{
+			return false;
+		}
+		else
+		{
+			std::cout << "Valeur incorrecte !" << std::endl;
+			continue;
+		}
+	}
+
+}
+
 
 int main()
 {
+
+
 	std::random_device rdmDevice; //un objet qui sert à obtenir l'entropie aléatoire du système
 	std::mt19937 rng(rdmDevice()); //le générateur de nb aléatoire → initialisé avec rdmDevice qui sert de graine
 	
@@ -77,6 +106,30 @@ int main()
 	timeU = time(0) - startTime;
 	score = (correctAnswer / timeU) * 100;
 	std::cout << "Tu as eu " << score << " points !" << std::endl;
+
+	double bestScore = getBestScore();
+	if (bestScore == NULL)
+	{
+		std::cout << "Impossible de lire le fichier 'scores.txt' !" << std::endl;
+	}
+	else if (score > bestScore)
+	{
+		std::cout << "Tu as battu le meilleur score !" << std::endl << "Veux tu sauvegarder ton score ? (y/n)"<<std::endl;
+		bool answer(checkInput);
+		if (answer)
+		{
+			std::string name("");
+			std::cout << "Quel est ton nom ?" << std::endl;
+			std::cin >> name;
+			writeScore(score, name);
+			std::cout << "Ton score a bien ete enregistre !" << std::endl;
+		}
+
+	}
+	else
+	{
+		std::cout << "Tu n'a pas battu le meilleur record de \"" << getName() << "\" qui est de " << bestScore << " !" << std::endl;
+	}
 
 	//std::cout << "Tu as repondu correctement a " << correctAnswer << " questions en " << timeU << " secondes" << std::endl;
 
