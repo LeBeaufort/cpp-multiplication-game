@@ -83,7 +83,8 @@ int main()
 	int correctAnswer(0);
 	double startTime(time(0));
 
-	std::cout << "Bienvenue dans ce programme de revision des tables de multiplication !" << std::endl << std::endl;
+	std::cout << "Bienvenue dans ce programme de revision des tables de multiplication !" << std::endl;
+	std::cout << "Built on " << __DATE__ << std::endl << std::endl;
 
 
 	for (number; number < 10; number++)
