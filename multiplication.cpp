@@ -7,6 +7,8 @@
 
 //todo : utiliser les fonctions définis dans fileFunction.cpp
 
+#include <chrono>    
+
 
 void setValues(int& n1, int& n2, int& answer, std::mt19937& rng)
 {
@@ -35,8 +37,10 @@ unsigned int safeInput()
 bool checkInput()
 {
 	std::string userinput("");
+	
 	while (true)
 	{
+
 		std::cin >> userinput;
 		if (userinput == "y")
 		{
@@ -55,10 +59,18 @@ bool checkInput()
 
 }
 
+std::string getTodayDate()
+{
+	std::time_t now = time(0);
+	char buffer[26];
+	ctime_s(buffer, sizeof(buffer), &now);
+
+	return buffer;
+}
+
 
 int main()
 {
-
 
 	std::random_device rdmDevice; //un objet qui sert à obtenir l'entropie aléatoire du système
 	std::mt19937 rng(rdmDevice()); //le générateur de nb aléatoire → initialisé avec rdmDevice qui sert de graine
@@ -115,20 +127,21 @@ int main()
 	else if (score > bestScore)
 	{
 		std::cout << "Tu as battu le meilleur score !" << std::endl << "Veux tu sauvegarder ton score ? (y/n)"<<std::endl;
-		bool answer(checkInput);
+		bool answer;
+		answer = checkInput();
 		if (answer)
 		{
 			std::string name("");
 			std::cout << "Quel est ton nom ?" << std::endl;
 			std::cin >> name;
-			writeScore(score, name);
+			writeScore(score, name, getTodayDate());
 			std::cout << "Ton score a bien ete enregistre !" << std::endl;
 		}
 
 	}
 	else
 	{
-		std::cout << "Tu n'a pas battu le meilleur record de \"" << getName() << "\" qui est de " << bestScore << " !" << std::endl;
+		std::cout << "Tu n'a pas battu le meilleur record de \"" << getName() << "\" etablie le " << getDate() << " qui est de " << bestScore << " !" << std::endl;
 	}
 
 	//std::cout << "Tu as repondu correctement a " << correctAnswer << " questions en " << timeU << " secondes" << std::endl;

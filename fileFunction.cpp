@@ -9,17 +9,13 @@ double getBestScore()
 
 	if (file) //on vérifie qu'on peut lire le fichier
 	{
-		double fileScore(0);
-		file >> fileScore;
 
-		if (!file) // si l'extraction ne s'est pas bien passée
-		{
-			return NULL;
-		}
-		else // si elle s'est bien passée on return
-		{
-			return fileScore;
-		}
+		double fileScore(0);
+		std::string fileScoreString;
+		std::getline(file, fileScoreString);
+		fileScore = std::stoi(fileScoreString);
+
+		return fileScore;
 	}
 
 	else //si c'est pas le cas, return NULL
@@ -32,13 +28,19 @@ std::string getName()
 {
 	std::ifstream file("scores.txt");
 	std::string line("");
+	int counter(0);
 	if (file)
 	{
 		while (std::getline(file, line))
 		{
-			continue;
+			if (counter == 1)
+			{
+				return line;
+			}
+			
+			counter++;
 		}
-		return line;
+		
 	}
 	else
 	{
@@ -48,14 +50,36 @@ std::string getName()
 
 }
 
-bool writeScore(double score, std::string name)
+std::string getDate()
+{
+	std::ifstream file("scores.txt");
+	std::string line("");
+	
+	int counter(0);
+
+	if (file)
+	{
+		while (std::getline(file, line))
+		{
+			if (counter == 2)
+			{
+				return line;
+			}
+
+			counter++;
+		}
+	}
+}
+
+bool writeScore(double score, std::string name, std::string date)
 {
 	std::ofstream file("scores.txt");
 
 	if (file)
 	{
 		file << score << std::endl;;
-		file << name;
+		file << name << std::endl;
+		file << date;
 		return true;
 	}
 
